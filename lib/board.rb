@@ -41,14 +41,14 @@ class Game
 
   def check_winner(player_piece)
     if ( 
-        ( @board[0][0] == @board[0][1] && @board[0][1] == @board[0][2] && @board[0][0] != nil ) ||
-        ( @board[1][0] == @board[1][1] && @board[1][1] == @board[1][2] && @board[1][0] != nil ) ||
-        ( @board[2][0] == @board[2][1] && @board[2][1] == @board[2][2] && @board[2][0] != nil ) ||
-        ( @board[0][0] == @board[1][0] && @board[1][0] == @board[2][0] && @board[0][0] != nil ) ||
-        ( @board[0][1] == @board[1][1] && @board[1][1] == @board[2][1] && @board[0][1] != nil ) ||
-        ( @board[0][2] == @board[1][2] && @board[1][2] == @board[2][2] && @board[0][2] != nil ) ||
-        ( @board[0][0] == @board[1][1] && @board[1][1] == @board[2][2] && @board[0][0] != nil ) ||
-        ( @board[2][0] == @board[1][1] && @board[1][1] == @board[0][2] && @board[2][0] != nil )
+        ( @board[0][0] != nil && @board[0][0] == @board[0][1] && @board[0][1] == @board[0][2] ) ||
+        ( @board[1][0] != nil && @board[1][0] == @board[1][1] && @board[1][1] == @board[1][2] ) ||
+        ( @board[2][0] != nil && @board[2][0] == @board[2][1] && @board[2][1] == @board[2][2] ) ||
+        ( @board[0][0] != nil && @board[0][0] == @board[1][0] && @board[1][0] == @board[2][0] ) ||
+        ( @board[0][1] != nil && @board[0][1] == @board[1][1] && @board[1][1] == @board[2][1] ) ||
+        ( @board[0][2] != nil && @board[0][2] == @board[1][2] && @board[1][2] == @board[2][2] ) ||
+        ( @board[0][0] != nil && @board[0][0] == @board[1][1] && @board[1][1] == @board[2][2] ) ||
+        ( @board[2][0] != nil && @board[2][0] == @board[1][1] && @board[1][1] == @board[0][2] )
       )
       @winner = @pieces.key(player_piece)
     else
