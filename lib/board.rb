@@ -4,8 +4,6 @@ class Game
     @column_map = { "A" => 0, "B" => 1, "C" => 2 }
     @row_map = { "1" => 0, "2" => 1, "3" => 2 }
     @pieces = { "Player 1" => "O", "Player 2" => "X"}
-    # @Player 1 = "O"
-    # @Player 2 = "X"
     @winner = nil
   end
 
@@ -20,10 +18,21 @@ class Game
   private
 
   def either_player_move(move, player_piece)
+    check_move_possible(move)
+    check_move_legal(move, player_piece)
+    outcome_of_move(player_piece)
+  end
+
+  def check_move_possible(move)
+    possible_moves = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
+    raise "That's off the board" unless possible_moves.include?(move)
+  end
+
+  def check_move_legal(move, player_piece)
     column = parse_column(move)
     row = parse_row(move)
+    raise "There's already a piece there" if @board[row][column] != nil
     @board[row][column] = player_piece
-    outcome_of_move(player_piece)
   end
 
   def outcome_of_move(player_piece)
@@ -32,11 +41,11 @@ class Game
   end
 
   def parse_column(move)
-    column = @column_map[move[0]]
+    column = @column_map.fetch(move[0], nil)
   end
 
   def parse_row(move)
-    row = @row_map[move[1]]
+    row = @row_map.fetch(move[1], nil)
   end
 
   def check_winner(player_piece)
