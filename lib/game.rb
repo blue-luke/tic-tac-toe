@@ -14,12 +14,12 @@ class Game
   end
 
   def player_1_move(move)
-    raise "It's not your go" unless player_1s_go?
+    raise "It's player 2's go" unless player_1s_go?
     either_player_move(move, @pieces["Player 1"])
   end
 
   def player_2_move(move)
-    raise "It's not your go" unless player_2s_go?
+    raise "It's player 1's go" unless player_2s_go?
     either_player_move(move, @pieces["Player 2"])
   end
 

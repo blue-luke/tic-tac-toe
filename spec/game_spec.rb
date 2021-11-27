@@ -77,14 +77,14 @@ describe Game do
     end
   end
   describe 'enforces alternate turns' do
-    it 'prevents O placing two O in a row' do
+    it 'prevents player 1 placing two O in a row' do
       game = Game.new
       game.player_1_move("A1")
-      expect { game.player_1_move("A2") }.to raise_error("It's not your go")
+      expect { game.player_1_move("A2") }.to raise_error("It's player 2's go")
     end
-    it 'prevents X going first' do
+    it 'prevents player 2 going first' do
       game = Game.new
-      expect { game.player_2_move("A1") }.to raise_error("It's not your go")
+      expect { game.player_2_move("A1") }.to raise_error("It's player 1's go")
     end
   end
 end
