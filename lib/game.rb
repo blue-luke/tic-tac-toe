@@ -8,9 +8,9 @@ class Game
     @row_map = { "1" => 0, "2" => 1, "3" => 2 }
     @pieces = { "Player 1" => "O", "Player 2" => "X"}
     @winner = nil
+    @draw = false
     @wincheck = wincheck.new
     @display = display.new
-    # @curent_player = 
   end
 
   def player_1_move(move)
@@ -62,10 +62,21 @@ class Game
 
   def outcome_of_move(player_piece)
     check_winner(player_piece)
-    @winner ? "#{@winner} is the winner!" : @board
+    check_draw
+    if @winner
+      "#{@winner} is the winner"
+    elsif @draw
+      "It's a draw"
+    else
+      return @board
+    end
   end
 
   def check_winner(player_piece)
     @wincheck.winner?(@board) ? ( @winner = @pieces.key(player_piece) ) : return 
+  end
+
+  def check_draw
+    !@board.flatten.include?(" ") ? @draw = true : return
   end
 end

@@ -9,7 +9,7 @@ class Display
     line7 = ("   |   |   " + "\n")
     line8 = (" " + "#{board[2][0]}" + " | " + "#{board[2][1]}" + " | " + "#{board[2][2]}" + " " + "\n")
     line9 = ("   |   |   ")
-    print(line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9)
+    print (line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9)
     return (line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9)
   end
 end
