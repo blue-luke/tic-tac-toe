@@ -39,4 +39,5 @@ describe Game do
     end
   end
 # add in test for sending message to wincheck
+# add in test for sending message to display
 end
