@@ -31,13 +31,16 @@ describe Game do
     end
   end
   describe 'seeing if there is a winner' do
-    xit 'checks to see if there is a winner' do
-      game = Game.new
+    let(:wincheckclassdummy) { double :WinCheck }
+    let(:wincheckinstancedummy) { double :@wincheck}
+
+    it 'checks to see if there is a winner' do
+      allow(wincheckclassdummy).to receive(:new).and_return(wincheckinstancedummy)
+      allow(wincheckinstancedummy).to receive(:winner?)
+      game = Game.new(wincheck = wincheckclassdummy)
       game.player_1_move("C1")
-      game.player_1_move("C2")
-      expect(game.player_1_move("C3")).to eq(board)
+      expect(wincheckinstancedummy).to have_received(:winner?)
     end
   end
-# add in test for sending message to wincheck
 # add in test for sending message to display
 end
