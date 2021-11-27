@@ -9,13 +9,15 @@ describe Game do
     end
     it 'lets player 1 enter two Os' do
       game = Game.new
-      board = [["O", "O", " "],[" ", " ", " "],[" ", " ", " "]]
+      board = [["O", "O", "X"],[" ", " ", " "],[" ", " ", " "]]
       game.player_1_move("A1")
+      game.player_2_move("C1")
       expect(game.player_1_move("B1")).to eq(board)
     end
     it 'lets player 2 enter an X' do
       game = Game.new
-      board = [[" ", " ", "X"],[" ", " ", " "],[" ", " ", " "]]
+      board = [["O", " ", "X"],[" ", " ", " "],[" ", " ", " "]]
+      game.player_1_move("A1")
       expect(game.player_2_move("C1")).to eq(board)
     end
   end
@@ -23,7 +25,7 @@ describe Game do
     it 'prevents you placing a piece where this is already a piece' do
       game = Game.new
       game.player_1_move("C1")
-      expect { game.player_1_move("C1") }.to raise_error("There's already a piece there")
+      expect { game.player_2_move("C1") }.to raise_error("There's already a piece there")
     end
     it 'checks input ranges between A1 and C3' do
       game = Game.new
@@ -60,16 +62,29 @@ describe Game do
       end
     end
   end
-  it 'declares a draw if there are no moves left' do
-    game = Game.new
-    game.player_1_move("A1")
-    game.player_2_move("A2")
-    game.player_1_move("A3")
-    game.player_2_move("B2")
-    game.player_1_move("B1")
-    game.player_2_move("B3")
-    game.player_1_move("C2")
-    game.player_2_move("C1")
-    expect(game.player_1_move("C3")).to eq("It's a draw")
+  describe 'draw' do
+    it 'declares a draw if there are no moves left' do
+      game = Game.new
+      game.player_1_move("A1")
+      game.player_2_move("A2")
+      game.player_1_move("A3")
+      game.player_2_move("B2")
+      game.player_1_move("B1")
+      game.player_2_move("B3")
+      game.player_1_move("C2")
+      game.player_2_move("C1")
+      expect(game.player_1_move("C3")).to eq("It's a draw")
+    end
+  end
+  describe 'enforces alternate turns' do
+    it 'prevents O placing two O in a row' do
+      game = Game.new
+      game.player_1_move("A1")
+      expect { game.player_1_move("A2") }.to raise_error("It's not your go")
+    end
+    it 'prevents X going first' do
+      game = Game.new
+      expect { game.player_2_move("A1") }.to raise_error("It's not your go")
+    end
   end
 end

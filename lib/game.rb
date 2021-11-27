@@ -6,7 +6,7 @@ class Game
     @board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
     @column_map = { "A" => 0, "B" => 1, "C" => 2 }
     @row_map = { "1" => 0, "2" => 1, "3" => 2 }
-    @pieces = { "Player 1" => "O", "Player 2" => "X"}
+    @pieces = { "Player 1" => "O", "Player 2" => "X" }
     @winner = nil
     @draw = false
     @wincheck = wincheck.new
@@ -14,10 +14,12 @@ class Game
   end
 
   def player_1_move(move)
+    raise "It's not your go" unless player_1s_go?
     either_player_move(move, @pieces["Player 1"])
   end
 
   def player_2_move(move)
+    raise "It's not your go" unless player_2s_go?
     either_player_move(move, @pieces["Player 2"])
   end
 
@@ -26,6 +28,14 @@ class Game
   end
 
   private
+
+  def player_1s_go?
+    @board.flatten.count("O") == @board.flatten.count("X")
+  end
+
+  def player_2s_go?
+    @board.flatten.count("O") == @board.flatten.count("X") + 1
+  end
 
   def either_player_move(move, player_piece)
     check_move_possible(move)
