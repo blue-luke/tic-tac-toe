@@ -13,3 +13,5 @@ Next I needed to enable winning. The conditions for this are subtle and ugly.
 Halfway through writing the test to see if message to check for winner is sent
 
 Later, implement tracking current player
+
+Change how the board is printed, multiple lines

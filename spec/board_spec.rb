@@ -4,18 +4,18 @@ describe Game do
   describe 'placing pieces' do
     it 'lets player 1 enter an O' do
       game = Game.new
-      board = [["O", nil, nil],[nil, nil, nil],[nil, nil, nil]]
+      board = [["O", " ", " "],[" ", " ", " "],[" ", " ", " "]]
       expect(game.player_1_move("A1")).to eq(board)
   end
     it 'lets player 1 enter two Os' do
       game = Game.new
-      board = [["O", "O", nil],[nil, nil, nil],[nil, nil, nil]]
+      board = [["O", "O", " "],[" ", " ", " "],[" ", " ", " "]]
       game.player_1_move("A1")
       expect(game.player_1_move("B1")).to eq(board)
     end
     it 'lets player 2 enter an X' do
       game = Game.new
-      board = [[nil, nil, "X"],[nil, nil, nil],[nil, nil, nil]]
+      board = [[" ", " ", "X"],[" ", " ", " "],[" ", " ", " "]]
       expect(game.player_2_move("C1")).to eq(board)
     end
   end
@@ -31,7 +31,7 @@ describe Game do
     end
   end
   describe 'seeing if there is a winner' do
-    it 'checks to see if there is a winner' do
+    xit 'checks to see if there is a winner' do
       game = Game.new
       game.player_1_move("C1")
       game.player_1_move("C2")
