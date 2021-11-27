@@ -30,16 +30,32 @@ describe Game do
       expect { game.player_1_move("D1") }.to raise_error("That's off the board")
     end
   end
-  describe 'seeing if there is a winner' do
+  describe '#check_winner' do
     let(:wincheckclassdummy) { double :WinCheck }
-    let(:wincheckinstancedummy) { double :@wincheck}
+    let(:wincheckinstancedummy) { double :@wincheck }
+    let(:displayclassdummy) { double :Display }
 
-    it 'checks to see if there is a winner' do
+    it 'sends message to wincheck class' do
       allow(wincheckclassdummy).to receive(:new).and_return(wincheckinstancedummy)
       allow(wincheckinstancedummy).to receive(:winner?)
-      game = Game.new(wincheck = wincheckclassdummy)
+      allow(displayclassdummy).to receive(:new)
+      game = Game.new(wincheck = wincheckclassdummy, display = displayclassdummy)
       game.player_1_move("C1")
       expect(wincheckinstancedummy).to have_received(:winner?)
+    end
+  end
+  describe '#show_board' do
+    let(:wincheckclassdummy) { double :WinCheck }
+    let(:displayclassdummy) { double :Display }
+    let(:displayinstancedummy) { double :@display }
+
+    it 'sends message to display class' do
+      allow(displayclassdummy).to receive(:new).and_return(displayinstancedummy)
+      allow(displayinstancedummy).to receive(:show)
+      allow(wincheckclassdummy).to receive(:new)
+      game = Game.new(wincheck = wincheckclassdummy, display = displayclassdummy)
+      game.show_board
+      expect(displayinstancedummy).to have_received(:show)
     end
   end
 # add in test for sending message to display

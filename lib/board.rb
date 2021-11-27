@@ -2,14 +2,14 @@ require_relative '../lib/win_check'
 require_relative '../lib/display'
 
 class Game
-  def initialize(wincheck = WinCheck)
+  def initialize(wincheck = WinCheck, display = Display)
     @board = [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]
     @column_map = { "A" => 0, "B" => 1, "C" => 2 }
     @row_map = { "1" => 0, "2" => 1, "3" => 2 }
     @pieces = { "Player 1" => "O", "Player 2" => "X"}
     @winner = nil
     @wincheck = wincheck.new
-    @display = Display.new
+    @display = display.new
     # @curent_player = 
   end
 
